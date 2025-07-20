@@ -10,7 +10,12 @@
     <div class="bg-white shadow-lg rounded-xl p-8 max-w-lg w-full">
       <h1 class="text-2xl font-bold mb-4 text-center text-blue-600">VidPick
         Video Downloader</h1>
-      <form action="" method="POST" class="space-y-4">
+
+      {{#if error}}
+        <p class="text-red-600 text-sm mb-4 text-center">{{error}}</p>
+      {{/if}}
+
+      <form action="/download" method="POST" class="space-y-4">
         <input
           type="text"
           placeholder="Paste video URL"
@@ -22,6 +27,28 @@
           class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 transition duratino-300 ease-in-out rounded-md"
         >Download</button>
       </form>
+
+      {{#if title}}
+        <div class="mt-6">
+          <h2
+            class="text-lg font-medium mb-2 text-center text-grey-600"
+          >Download options for:
+            <span class="font-semibold">{{title}}</span></h2>
+            <ul class="space-y-2">
+              {{#each formats}}
+                <li>
+                <a
+                  href="/download?url={{../videoURL}}&itag={{itag}}"
+                  class="block text-blue-600 hover:underline text-sm"
+                  target="_blank"
+                >
+                  {{container}} - {{qualityLabel}} ({{mimeType}})
+                </a>
+              </li>
+              {{/each}}
+            </ul>
+        </div>
+      {{/if}}
     </div>
   </body>
 </html>
