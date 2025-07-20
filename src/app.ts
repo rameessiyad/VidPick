@@ -3,6 +3,8 @@ import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
+import routes from "./routes/index";
+
 const app: Application = express();
 const port = process.env.PORT || 3000;
 
@@ -15,11 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes
-app.get("/", (req: Request, res: Response) => {
-  res.render("index", {
-    title: "Video downloader",
-  });
-});
+app.get("/", routes);
 
 //start server
 app.listen(port, () => {
