@@ -26,7 +26,7 @@ router.post("/download", async (req: Request, res: Response) => {
       videoURL,
     });
   } catch (error) {
-    console.log(error);
+    console.error("download error", error);
     res.render("index", { error: "Failed to process the video URL" });
   }
 });
